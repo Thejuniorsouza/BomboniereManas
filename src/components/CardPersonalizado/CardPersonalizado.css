@@ -1,0 +1,87 @@
+import React from 'react';
+import { Box, Typography } from '@mui/material';
+
+/* const CardPersonalizado = ({ imagem, titulo, descricao, formatoImagem }) => {
+  // Define o estilo do clipe de caminho (path clip) com base no formatoImagem
+  let clipPathStyle = {};
+  let borderRadiusStyle = {};
+
+  switch (formatoImagem) {
+    case 'quadrado':
+      // Imagem quadrada padrão
+      borderRadiusStyle = { borderRadius: '0' };
+      break;
+    case 'portal':
+      // Quadrado com as pontas de cima arqueadas (formato de portal)
+      // Usaremos border-radius para as bordas superiores e um clip-path para a base
+      // Para um efeito mais complexo de portal, pode ser necessário um SVG ou um clip-path mais detalhado.
+      // Aqui, faremos um arqueado suave nas bordas superiores e manteremos a base reta.
+      borderRadiusStyle = {
+        borderTopLeftRadius: '50% 20%', // Raio horizontal e vertical
+        borderTopRightRadius: '50% 20%',
+        borderBottomLeftRadius: '0',
+        borderBottomRightRadius: '0',
+      };
+      // Podemos usar um clip-path para "cortar" um pouco a base se for necessário um efeito mais acentuado de portal.
+      // Mas para "quadrado com as pontas de cima arqueadas", border-radius já faz boa parte do trabalho visual.
+      // clipPathStyle = { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)' }; // Exemplo, pode ser ajustado
+      break;
+    case 'redondo':
+      // Imagem redonda
+      borderRadiusStyle = { borderRadius: '50%' };
+      break;
+    default:
+      // Padrão para quadrado se nenhum formato for especificado
+      borderRadiusStyle = { borderRadius: '0' };
+  }
+
+  return (
+    <Box
+      sx={{
+        width: { xs: '90%', sm: '80%', md: '300px' }, // Largura responsiva para os cards
+        maxWidth: '350px',
+        margin: '20px',
+        padding: '20px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+        backgroundColor: '#fff',
+        borderRadius: '8px',
+        boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1)',
+      }}
+    >
+      <Box
+        sx={{
+          width: { xs: '150px', md: '180px' }, // Tamanho do container da imagem
+          height: { xs: '150px', md: '180px' },
+          overflow: 'hidden', // Importante para cortar a imagem se o formato não for quadrado
+          marginBottom: '15px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          ...clipPathStyle, // Aplica o clip-path se houver
+          ...borderRadiusStyle, // Aplica o border-radius
+        }}
+      >
+        <img
+          src={imagem}
+          alt={titulo}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover', // Garante que a imagem cubra o espaço sem distorcer
+          }}
+        />
+      </Box>
+      <Typography variant="h5" component="h3" gutterBottom sx={{ fontFamily: 'Roboto, sans-serif', color: '#402620', mt: 1 }}>
+        {titulo}
+      </Typography>
+      <Typography variant="body1" sx={{ fontFamily: 'Roboto, sans-serif', color: '#666' }}>
+        {descricao}
+      </Typography>
+    </Box>
+  );
+};
+
+export default CardPersonalizado; */

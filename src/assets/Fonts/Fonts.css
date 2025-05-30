@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "tan-mon-cheri";
+    src: url("./tan-mon-cheri.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "coco-gothic";
+    src: url("./coco-gothic.regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
