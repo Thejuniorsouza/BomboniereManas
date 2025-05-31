@@ -4,13 +4,13 @@ import { Box, useTheme, useMediaQuery } from "@mui/material";
 const TwoColumnTextSection = ({
     leftContent,
     rightContent,
-    isLeftImage = false,
-    isRightImage = false,
+    isLeftImage = false, // <-- Propriedade para indicar se o conteúdo é uma imagem
+    isRightImage = false, // <-- Propriedade para indicar se o conteúdo é uma imagem
+    backgroundColor = true,
+    minHeight,
 }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
-    const sectionBackgroundColor = "#f1ede8";
 
     return (
         <Box
@@ -18,11 +18,11 @@ const TwoColumnTextSection = ({
                 display: "flex",
                 flexDirection: isMobile ? "column" : "row",
                 width: "100vw",
-                minHeight: "100vh", // Garante que a seção ocupe no mínimo 100% da altura da viewport
+                minHeight: { minHeight },
                 overflow: "hidden",
-                backgroundColor: sectionBackgroundColor,
+                backgroundColor: { backgroundColor },
                 alignItems: "center",
-                justifyContent: "center", // Centraliza os quadrantes verticalmente dentro da seção
+                justifyContent: "center",
             }}
         >
             {/* Primeiro Quadrante */}
@@ -31,36 +31,40 @@ const TwoColumnTextSection = ({
                     flex: 1,
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "center", // ALINHA CONTEÚDO VERTICALMENTE
-                    alignItems: "center", // ALINHA CONTEÚDO HORIZONTALMENTE
+                    justifyContent: "center",
+                    alignItems: "center",
                     textAlign: "center",
-                    padding: { xs: 2, md: 4 },
-                    // Garante que o quadrante sempre ocupe altura para a centralização
-                    height: isMobile ? "auto" : "100%", // Em mobile, auto, em desktop 100%
-                    minHeight: isMobile ? "50vh" : "auto", // Força altura mínima em mobile
-                    ...(isLeftImage &&
-                        isMobile && { height: "300px", minHeight: "300px" }),
+                    overflow: "hidden",
+                    height: "100%",
+                    // Ajuste de minHeight para garantir que a imagem tenha espaço em mobile
+                    minHeight: isMobile
+                        ? isLeftImage
+                            ? "50vh" // Um pouco mais de altura para a imagem em mobile
+                            : "50vh"
+                        : "auto",
                 }}
             >
                 {leftContent}
             </Box>
 
-            {/* Segundo Quadrante (Onde queremos space-around) */}
+            {/* Segundo Quadrante */}
             <Box
                 sx={{
                     flex: 1,
                     display: "flex",
-                    flexDirection: "column", // MUITO IMPORTANTE: Eixo principal vertical
-                    justifyContent: "space-around", // <--- AQUI DEVE FUNCIONAR PARA O CONTEÚDO
-                    alignItems: "center", // Alinha o conteúdo horizontalmente
+                    overflow: "hidden",
+                    flexDirection: "column",
+                    justifyContent: "space-around", // Mantido para o texto+botão
+                    alignItems: "center",
                     textAlign: "center",
-
                     padding: { xs: 2, md: 4 },
-                    // Garante que o quadrante sempre ocupe altura para a distribuição
-                    height: isMobile ? "auto" : "100%",
-                    // minHeight: isMobile ? "50vh" : "auto",
-                    // ...(isRightImage &&
-                    //     isMobile && { height: "300px", minHeight: "300px" }),
+                    height: "100%",
+                    // Ajuste de minHeight para garantir que o texto/botão tenha espaço em mobile
+                    minHeight: isMobile
+                        ? isRightImage
+                            ? "60vh" // Se for imagem aqui, daria mais altura
+                            : "50vh"
+                        : "auto",
                 }}
             >
                 {rightContent}
