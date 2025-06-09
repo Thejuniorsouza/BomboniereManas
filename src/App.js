@@ -2,6 +2,7 @@ import "./App.css";
 import "./assets/Fonts/Fonts.css";
 import HeroSection from "./components/HeroSection/HeroSection";
 import ProductCards from "./components/ProductCards/ProductCards";
+import PhoneIcon from "@mui/icons-material/Phone";
 
 import {
     Typography,
@@ -10,9 +11,11 @@ import {
     Box,
     Button,
     Link,
+    ThemeProvider,
 } from "@mui/material";
 
 import TwoColumnTextSection from "./components/TwoColumnTextSection/TwoColumnTextSection";
+import breakpointTheme from "./util/theme";
 
 import newSectionImage from "./assets/image/image4.jpg"; // Certifique-se que o caminho da sua imagem está correto!
 
@@ -26,6 +29,9 @@ function App() {
     const mensagemCodificada = encodeURIComponent(mensagemPadrao);
     const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
 
+    const numeroTelefone = "558532792981"; // Mesma lógica: DDI + DDD + Número
+    const linkTelefone = `tel:${numeroTelefone}`; // Protocolo 'tel:'
+
     const address = "Rua Barra Nova, 126, Jardim das Oliveiras, Fortaleza - CE";
     // Usando a URL de incorporação que você me forneceu.
     const googleMapsEmbedUrl =
@@ -35,50 +41,41 @@ function App() {
     // --- SEÇÃO 1: Conteúdo de Texto + Texto ---
     const firstSectionLeftContent = (
         <>
-            <Box
+            <Typography
+                variant="h3"
+                gutterBottom
                 sx={{
-                    height: "100vh",
-                }}
-            >
-                <Typography
-                    variant="h3"
-                    gutterBottom
-                    sx={{
-                        fontFamily: "tan-mon-cheri, sans-serif",
-                        color: "#402620",
-                        fontSize: isMobile ? "2.5rem" : "4.5rem",
-                        textAlign: "center",
-                    }}
-                >
-                    Desde 1992 oferecendo os melhores produtos e serviços.
-                </Typography>
-                <Typography
-                    variant="h6"
-                    gutterBottom
-                    sx={{
-                        fontFamily: "coco-gothic, sans-serif",
-                        color: "#402620",
-                        fontSize: isMobile ? "1rem" : "2rem",
-                        textAlign: "center",
-                        mt: 2,
-                    }}
-                >
-                    Explore um universo de sabores e cores, feito para alegrar
-                    seus momentos mais especiais.
-                </Typography>
-                {/* <Typography
-                variant="body2"
-                sx={{
-                    fontFamily: "coco-gothic, sans-serif",
+                    fontFamily: "tan-mon-cheri, sans-serif",
                     color: "#402620",
-                    fontSize: isMobile ? "0.8rem" : "1.2rem",
+                    fontSize: isMobile
+                        ? "2.5rem"
+                        : {
+                              xs: "2.4rem", // Extra-small (smartphones pequenos)
+                              sm: "2.5rem", // Small (smartphones maiores, tablets)
+                              md: "3rem", // Medium (tablets paisagem, desktops pequenos)
+                              lg: "3.5rem", // Large (desktops médios)
+                              xl: "3.5rem", // Extra-large (desktops grandes)
+                          },
                     textAlign: "center",
                     mt: 2,
                 }}
             >
-                Sua felicidade é a nossa receita.
-            </Typography> */}
-            </Box>
+                Desde 1992 oferecendo os melhores produtos e serviços.
+            </Typography>
+            <Typography
+                variant="h6"
+                gutterBottom
+                sx={{
+                    fontFamily: "coco-gothic, sans-serif",
+                    color: "#402620",
+                    fontSize: isMobile ? "1rem" : "2rem",
+                    textAlign: "center",
+                    mt: 2,
+                }}
+            >
+                Explore um universo de sabores e cores, feito para alegrar seus
+                momentos mais especiais.
+            </Typography>
         </>
     );
 
@@ -92,6 +89,7 @@ function App() {
                     color: "#402620",
                     fontSize: isMobile ? "2.5rem" : "4rem",
                     textAlign: "center",
+                    mt: isMobile ? "-4rem" : "0",
                 }}
             >
                 Nosso Compromisso
@@ -104,6 +102,7 @@ function App() {
                     color: "#402620",
                     fontSize: isMobile ? "1rem" : "1.8rem",
                     textAlign: "center",
+                    mt: isMobile ? "-10rem" : "0",
                     marginBottom: isMobile ? "1rem" : "1.5rem",
                 }}
             >
@@ -131,7 +130,7 @@ function App() {
         <Box // This Box is the immediate parent of the <img> and child of the quadrant's Box
             sx={{
                 // width: "100%",
-                height: "100vh", // <--- ESSENTIAL: Ensure this inner Box also takes full height
+                height: isMobile ? "60vh" : "100vh", // <--- ESSENTIAL: Ensure this inner Box also takes full height
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -144,7 +143,7 @@ function App() {
                 alt="Descrição da Imagem da Nova Seção"
                 style={{
                     width: "100%",
-                    height: "100vh",
+                    height: isMobile ? "60vh" : "100vh",
                     objectFit: "cover", // This is key for filling and cropping
                     display: "block",
                 }}
@@ -238,26 +237,6 @@ function App() {
                     Loja Física
                 </Typography>
 
-                <Typography
-                    variant={isMobile ? "body2" : "body1"}
-                    color="#402620"
-                    align="center"
-                    sx={{
-                        fontFamily: "Roboto, sans-serif",
-                        marginBottom: theme.spacing(1),
-                        fontSize: isMobile ? "1rem" : "1.8rem",
-                    }}
-                >
-                    <Link
-                        color="inherit"
-                        href={googleMapsUrl}
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        {address}
-                    </Link>
-                </Typography>
-
                 {/* Iframe para exibir o mapa */}
                 <Box
                     component="iframe"
@@ -278,6 +257,25 @@ function App() {
                     title="Localização no Google Maps" // Adicione um título para acessibilidade
                 />
             </Box>
+            <Typography
+                variant={isMobile ? "body2" : "body1"}
+                color="#402620"
+                align="center"
+                sx={{
+                    fontFamily: "Roboto, sans-serif",
+                    marginBottom: theme.spacing(1),
+                    fontSize: isMobile ? "1rem" : "1.8rem",
+                }}
+            >
+                <Link
+                    color="inherit"
+                    href={googleMapsUrl}
+                    target="_blank"
+                    rel="noopener"
+                >
+                    {address}
+                </Link>
+            </Typography>
 
             <Typography
                 variant="h7"
@@ -317,7 +315,7 @@ function App() {
             >
                 Telefone
             </Typography>
-            <Typography
+            {/* <Typography
                 variant="body1"
                 gutterBottom
                 sx={{
@@ -329,41 +327,68 @@ function App() {
                 }}
             >
                 (85)3279-2981
-            </Typography>
+            </Typography> */}
+            <Button
+                variant="outlined" // Use "outlined" ou "text" para um estilo secundário
+                sx={{
+                    fontFamily: "Roboto, sans-serif ",
+                    borderColor: "#402620", // Cor da borda
+                    color: "#402620", // Cor do texto
+                    fontSize: {
+                        xs: "0.9rem",
+                        sm: "1rem",
+                        md: "1.2rem",
+                        lg: "1.5rem",
+                        xl: "2rem",
+                    },
+                    padding: "10px 20px",
+                    "&:hover": {
+                        backgroundColor: "rgba(64, 38, 32, 0.04)", // Leve fundo no hover
+                    },
+                }}
+                href={linkTelefone} // Usa o link tel:
+                startIcon={<PhoneIcon />} // Adiciona ícone de telefone
+            >
+                (85)3279-2981
+            </Button>
         </>
     );
 
     return (
         <div className="App">
-            <HeroSection />
-            <ProductCards />
+            <ThemeProvider theme={breakpointTheme}>
+                <HeroSection />
+                <ProductCards />
+                <section class="curved"></section>
 
-            <TwoColumnTextSection
-                leftContent={firstSectionLeftContent}
-                rightContent={firstSectionRightContent}
-                isLeftImage={false}
-                isRightImage={false}
-                backgroundColor="#f1ede8"
-                minHeight={"100vh"}
-            />
+                <TwoColumnTextSection
+                    leftContent={firstSectionLeftContent}
+                    rightContent={firstSectionRightContent}
+                    isLeftImage={false}
+                    isRightImage={false}
+                    backgroundColor="#f1ede8"
+                    minHeight={"100vh"}
+                    marginTop={"-2rem"}
+                />
 
-            <TwoColumnTextSection
-                leftContent={secondSectionLeftContent}
-                rightContent={secondSectionRightContent}
-                isLeftImage={true}
-                isRightImage={false}
-                backgroundColor="#c4b3dd"
-                minHeight={"80vh"}
-            />
+                <TwoColumnTextSection
+                    leftContent={secondSectionLeftContent}
+                    rightContent={secondSectionRightContent}
+                    isLeftImage={true}
+                    isRightImage={false}
+                    backgroundColor="#c4b3dd"
+                    minHeight={"80vh"}
+                />
 
-            <TwoColumnTextSection
-                leftContent={thirdSectionLeftContent}
-                rightContent={thirdSectionRightContent}
-                isLeftImage={false}
-                isRightImage={false}
-                backgroundColor="#ebd4d9"
-                minHeight={"80vh"}
-            />
+                <TwoColumnTextSection
+                    leftContent={thirdSectionLeftContent}
+                    rightContent={thirdSectionRightContent}
+                    isLeftImage={false}
+                    isRightImage={false}
+                    backgroundColor="#ebd4d9"
+                    minHeight={"80vh"}
+                />
+            </ThemeProvider>
         </div>
     );
 }

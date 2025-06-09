@@ -8,6 +8,7 @@ const TwoColumnTextSection = ({
     isRightImage = false, // <-- Propriedade para indicar se o conteúdo é uma imagem
     backgroundColor = true,
     minHeight,
+    marginTop = 0,
 }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -23,6 +24,7 @@ const TwoColumnTextSection = ({
                 backgroundColor: { backgroundColor },
                 alignItems: "center",
                 justifyContent: "center",
+                mt: { marginTop },
             }}
         >
             {/* Primeiro Quadrante */}

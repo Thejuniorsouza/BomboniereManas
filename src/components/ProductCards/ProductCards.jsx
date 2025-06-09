@@ -1,4 +1,5 @@
 import React from "react";
+import productCards from "../ProductCards/productCards.css";
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import CardPersonalizado from "../CardPersonalizado/CardPersonalizado"; // Verifique o caminho se necessário
 

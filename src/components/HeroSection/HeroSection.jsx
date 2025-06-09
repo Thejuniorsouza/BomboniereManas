@@ -35,7 +35,7 @@ const HeroSection = () => {
     const isXl = useMediaQuery(theme.breakpoints.only("xl")); // Apenas telas extra-grandes (1920px+)
 
     // Conveniência para agrupar dispositivos menores
-    const isMobileOrTablet = useMediaQuery(theme.breakpoints.down("md")); // Menor que 960px (xs, sm)
+    const isMobileOrTablet = useMediaQuery(theme.breakpoints.down("lg")); // Menor que 960px (xs, sm)
     const isDesktop = useMediaQuery(theme.breakpoints.up("md")); // Maior ou igual a 960px (md, lg, xl)
 
     const numeroWhatsApp = "5585987331754";
@@ -96,6 +96,7 @@ const HeroSection = () => {
                             : isMd
                             ? "13rem"
                             : "13rem",
+
                         objectFit: "contain",
                         display: "block",
                         alignSelf: "center",

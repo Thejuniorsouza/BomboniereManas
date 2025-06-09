@@ -1,7 +1,7 @@
 // src/theme.js
 import { createTheme } from "@mui/material/styles";
 
-const customTheme = createTheme({
+const breakpointTheme = createTheme({
     breakpoints: {
         values: {
             // Aqui você define seus próprios valores em pixels para cada breakpoint.
@@ -11,7 +11,7 @@ const customTheme = createTheme({
             sm: 480, // Exemplo: Smartphones em paisagem, tablets pequenos
             md: 768, // Exemplo: Tablets, laptops pequenos
             lg: 1024, // Exemplo: Laptops, desktops médios
-            xl: 1440, // Exemplo: Desktops grandes
+            xl: 1535, // Exemplo: Desktops grandes
             // Você também pode adicionar novos breakpoints personalizados:
             // wide: 1920,
             // ultraWide: 2560,
@@ -32,13 +32,9 @@ const customTheme = createTheme({
         // ...
     },
     typography: {
-        fontFamily: [
-            "Roboto",
-            '"tan-mon-cheri"', // Adicione suas fontes personalizadas aqui
-            "sans-serif",
-        ].join(","),
+        fontFamily: ["Roboto", '"tan-mon-cheri"', "sans-serif"].join(","),
         // ...
     },
 });
 
-export default customTheme;
+export default breakpointTheme;
